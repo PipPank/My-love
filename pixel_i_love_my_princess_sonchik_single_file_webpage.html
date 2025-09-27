@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pixel: I LOVE MY PRINCESS SONCHIK</title>
+  <!-- Pixel-style webfont from Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg1:#fff0f8;
+      --bg2:#ffe6f2;
+      --pink:#ff4da6; /* main pink color */
+      --shadow:#ff1f8a; /* darker pink for pixel shadow */
+    }
+    html,body{height:100%;margin:0;font-family: 'Press Start 2P', monospace;background:linear-gradient(135deg,var(--bg1),var(--bg2));-webkit-font-smoothing: none;}
+    .wrap{min-height:100%;display:flex;align-items:center;justify-content:center;padding:40px}
+    .card{background:rgba(255,255,255,0.6);border-radius:18px;padding:36px 28px;box-shadow:0 10px 30px rgba(0,0,0,0.08);text-align:center}
+
+    /* Pixel text styling */
+    .pixel-text{
+      font-size:28px; /* base for small screens - scales up */
+      line-height:1.05;
+      color:var(--pink);
+      text-transform:uppercase;
+      letter-spacing:2px;
+      /* create crisp blocky / pixel-ish look with multiple text-shadows */
+      text-shadow:
+        2px 0 0 var(--shadow),
+        4px 0 0 rgba(0,0,0,0.02),
+        0 2px 0 rgba(0,0,0,0.02),
+        2px 2px 0 rgba(0,0,0,0.02);
+      transform:translateZ(0);
+      -webkit-font-smoothing: none;
+      -moz-osx-font-smoothing: grayscale;
+      display:inline-block;
+      padding:18px 22px;
+      border-radius:8px;
+      background:linear-gradient(180deg,rgba(255,255,255,0.12),rgba(255,255,255,0));
+    }
+
+    /* Scale up on larger screens to get the pixelated poster look */
+    @media(min-width:640px){.pixel-text{font-size:40px;padding:30px 36px}}
+    @media(min-width:1024px){.pixel-text{font-size:58px;padding:44px 56px}}
+
+    .sub{margin-top:14px;font-size:12px;color:#666;text-transform:none;font-family:Arial,Helvetica,sans-serif}
+
+    /* download button */
+    .controls{margin-top:18px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+    .btn{cursor:pointer;border:0;padding:10px 14px;border-radius:10px;background:var(--pink);color:white;font-family:Arial,Helvetica,sans-serif;font-weight:700}
+    .btn.ghost{background:transparent;color:var(--pink);border:2px solid var(--pink)}
+
+    /* small pixel heart */
+    .heart{display:inline-block;margin-left:12px;vertical-align:middle}
+
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <div id="pixel" class="pixel-text">I LOVE MY PRINCESS SONCHIK))))))))))</div>
+      <div class="sub">Pink pixel-style text — edit the text below and press Update</div>
+
+      <div class="controls">
+        <button class="btn" id="download">Download this page</button>
+        <button class="btn ghost" id="update">Update text</button>
+      </div>
+
+      <div style="margin-top:14px;font-size:13px;color:#444;">
+        <label style="font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#444;">Edit text: </label>
+        <input id="inputText" style="width:60%;padding:10px;border-radius:8px;border:1px solid #ddd;font-family:Arial,Helvetica,sans-serif;margin-left:8px" value="I LOVE MY PRINCESS SONCHIK))))))))))" />
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Update displayed text
+    document.getElementById('update').addEventListener('click', ()=>{
+      const v = document.getElementById('inputText').value || 'I LOVE MY PRINCESS SONCHIK))))))))))';
+      document.getElementById('pixel').textContent = v;
+    });
+
+    // Create downloadable HTML file of this page
+    document.getElementById('download').addEventListener('click', ()=>{
+      const html = '<!doctype html>' + document.documentElement.outerHTML;
+      const blob = new Blob([html], {type: 'text/html;charset=utf-8'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'i-love-my-princess-sonchik.html';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    });
+  </script>
+</body>
+</html>
